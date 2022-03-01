@@ -1,0 +1,46 @@
+quarkus:
+  log:
+    file:
+      enable: true
+      path: ./log/bupf.log
+  http:
+    port: 6060
+    root-path: /bupf
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      url: jdbc:postgresql://${postgres_host:localhost}:${postgres_port:5432}/bb_space
+      max-size: 20
+    username: ${bupf_quarkus_datasource_username:guest}
+    password: ${bupf_quarkus_datasource_password:guest}
+  package:
+    runner-suffix: '_'
+
+api:
+  bilibili:
+    baseUrl: https://api.bilibili.com/x
+    relation:
+      stat:
+        url: ${api.bilibili.baseUrl}/relation/stat?vmid=%s&jsonp=jsonp
+    space:
+      acc:
+        info:
+          url: ${api.bilibili.baseUrl}/space/acc/info?mid=%s&jsonp=jsonp
+
+localExecutor:
+  maxAsync: -1
+  maxQueued: -1
+
+scheduled:
+  syncFollowerStats:
+    cron: ${bupf_scheduled_syncFollowerStats_cron:0 0/1 * * * ?}
+    userIds:
+      - 13925422
+      - 119801456
+      - 145149047
+      - 290548469
+      - 351609538
+      - 672328094
+      - 672342685
+      - 672346917
+      - 672353429
