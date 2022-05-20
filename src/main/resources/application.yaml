@@ -14,7 +14,8 @@ quarkus:
     username: ${bupf_quarkus_datasource_username:guest}
     password: ${bupf_quarkus_datasource_password:guest}
   package:
-    runner-suffix: '_'
+    output-name: bup
+    runner-suffix: f
 
 api:
   bilibili:
@@ -35,6 +36,7 @@ scheduled:
   syncFollowerStats:
     cron: ${bupf_scheduled_syncFollowerStats_cron:0 0/1 * * * ?}
     userIds:
+      - 7349
       - 13925422
       - 119801456
       - 145149047
